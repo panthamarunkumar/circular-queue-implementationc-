@@ -1,0 +1,75 @@
+# circular-queue-implementation using array
+#include<iostream>
+using namespace std;
+#define SIZE 5
+int front=-1;
+int rear=-1;
+int queue[SIZE];
+void enqueue(int x)
+{
+    if(front==(rear+1)%SIZE)
+    {
+        cout<<"queue is full";
+    }
+    else if(front==-1&&rear==-1)
+    {
+        front=rear=0;
+        queue[rear]=x;
+        
+     
+    }
+    else
+    {
+        rear=(rear+1)%SIZE;
+        queue[rear]=x;
+        
+    }
+    
+}
+void dequeue()
+{
+    if(front==-1&&rear==-1)
+    {
+        cout<<"empty queue";
+        
+    }
+    else if(front==rear)
+    {
+        front=rear=-1;
+    }
+    else
+    {
+        cout<<"te element dequeud:"<<queue[front];
+        front=(front+1)%SIZE;
+        
+    }
+}
+void peek()
+{
+    cout<<"te peek elemt is:"<<queue[front];
+    cout<<"\n";
+}
+void diplay()
+{
+    int i=front;
+    while(i!=rear)
+    {
+        cout<<queue[i]<<" ";
+        i=(i+1)%SIZE;
+    }
+    cout<<queue[rear];
+    cout<<"\n";
+    
+}
+int main()
+{
+    enqueue(3);
+     enqueue(4);
+      enqueue(9);
+      cout<<"te queu befotre del";
+      diplay();
+      peek();
+      dequeue();
+      dequeue();
+}
+
