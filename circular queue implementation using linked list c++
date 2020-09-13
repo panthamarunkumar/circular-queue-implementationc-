@@ -1,0 +1,78 @@
+#circular queue implementation using linked list c++
+#include<iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node* next;
+};
+struct node *front=0;
+struct node *rear=0;
+void enqueue(int x)
+{
+    struct node *new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=x;
+    new_node->next=NULL;
+    if(front==0&&rear==0)
+    {
+        front=rear=new_node;
+        rear->next=new_node;
+    }
+    else
+    {
+        rear->next=new_node;
+        rear=new_node;
+        rear->next=front;
+    }
+}
+void dequeue()
+{
+    struct node *temp;
+    temp=front;
+    if(front==0&&rear==0)
+    {
+        cout<<"empty queue";
+    }
+    else if(front==rear)
+    {
+        front=rear=0;
+        free(temp);
+    }
+    else
+    {
+        front=front->next;
+        rear->next=front;
+        free(temp);
+        
+        
+    }
+}
+void peek()
+{
+    cout<<"the peek node"<<front->data;
+    cout<<"\n";
+}
+void display()
+{
+    struct node *ptr;
+    ptr=front;
+    while(ptr->next!=front)
+    {
+        cout<<ptr->data<<" ";
+        ptr=ptr->next;
+    }
+    cout<<ptr->data;
+    cout<<"\n";
+}
+int main()
+{
+    enqueue(4);
+    enqueue(41);
+    enqueue(411);
+    display();
+    peek();
+    dequeue();
+    dequeue();
+    display();
+}
